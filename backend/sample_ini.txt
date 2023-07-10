@@ -1,0 +1,8 @@
+[PROD]
+DB_URI = 'postgresql://<username>:<password>@<address>:<port>/<db_name>
+
+[SECRET_KEY]
+JWT_SECRET_KEY = 
+
+[API]
+API_KEY = 
