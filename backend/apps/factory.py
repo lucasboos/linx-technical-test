@@ -4,6 +4,7 @@ from flask_jwt_extended import JWTManager
 
 from apps.user.web import user_api_v1
 from apps.record.web import record_api_v1
+from apps.weather.web import weather_api_v1
 
 
 def create_app():
@@ -13,5 +14,6 @@ def create_app():
 
     app.register_blueprint(user_api_v1)
     app.register_blueprint(record_api_v1)
+    app.register_blueprint(weather_api_v1)
 
     return app
