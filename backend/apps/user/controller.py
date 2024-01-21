@@ -73,7 +73,8 @@ class Login:
         token = {}
 
         if status == HTTPStatus.OK and bcrypt.checkpw(password.encode('utf-8'), user['password'].encode('utf-8')):
-            token['token'] = create_access_token(identity=user['username'])
+            additional_claims = {'user_id': user['id']}
+            token['token'] = create_access_token(identity=user['username'], additional_claims=additional_claims)
             return token, status
 
         return {'message': 'Invalid credentials'}, HTTPStatus.UNAUTHORIZED
