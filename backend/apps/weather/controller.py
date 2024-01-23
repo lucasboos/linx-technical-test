@@ -1,6 +1,7 @@
 import os
 import requests
 import configparser
+from datetime import datetime
 
 from http import HTTPStatus
 
@@ -31,6 +32,15 @@ class WeatherController:
         if response.status_code == 200:
             weather_data = response.json()
             RecordController.add_record(user_id, weather_data['city']['name'])
+            weather_data['list'] = cls.handling_forecast(weather_data['list'])
             return weather_data, HTTPStatus.OK
         else:
             return {'message': 'An internal error occurred.'}, HTTPStatus.INTERNAL_SERVER_ERROR
+
+    @classmethod
+    def handling_forecast(cls, weather_data):
+        def filter_half_day(data):
+            data_hour = datetime.strptime(data["dt_txt"], "%Y-%m-%d %H:%M:%S")
+            return data_hour.hour == 12
+
+        return list(filter(filter_half_day, weather_data))
