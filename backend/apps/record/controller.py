@@ -37,3 +37,11 @@ class RecordController:
         record.delete_record()
 
         return {'message': 'Record deleted successfully'}, HTTPStatus.OK
+
+    @classmethod
+    def delete_all_records_by_user(cls, user_id):
+        try:
+            RecordModel.delete_all_records_by_user(user_id)
+            return {'message': 'All records deleted successfully'}, HTTPStatus.OK
+        except Exception as e:
+            return {'message': 'An internal error occurred.'}, HTTPStatus.INTERNAL_SERVER_ERROR

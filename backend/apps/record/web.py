@@ -56,3 +56,12 @@ def api_delete_record(id):
         return jsonify(response), status
     except Exception as e:
         return jsonify({'error': str(e)}), HTTPStatus.BAD_REQUEST
+
+
+@record_api_v1.route('/delete/<user_id>', methods=['DELETE'])
+def api_delete_all_records_by_user(user_id):
+    try:
+        response, status = RecordController.delete_all_records_by_user(user_id)
+        return jsonify(response), status
+    except Exception as e:
+        return jsonify({'error': str(e)}), HTTPStatus.BAD_REQUEST

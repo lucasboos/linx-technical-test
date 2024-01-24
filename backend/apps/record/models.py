@@ -21,6 +21,7 @@ class RecordModel(db.Model):
             'id': self.id,
             'user_id': self.user_id,
             'searched_region': self.searched_region,
+            'date': self.date,
         }
 
     @classmethod
@@ -30,6 +31,15 @@ class RecordModel(db.Model):
     @classmethod
     def get_records_by_user(cls, user_id):
         return [record for record in cls.query.filter_by(user_id=user_id).all()]
+
+    @classmethod
+    def delete_all_records_by_user(cls, user_id):
+        records_to_delete = cls.query.filter_by(user_id=user_id).all()
+
+        for record in records_to_delete:
+            db.session.delete(record)
+
+        db.session.commit()
 
     def save_record(self):
         db.session.add(self)
