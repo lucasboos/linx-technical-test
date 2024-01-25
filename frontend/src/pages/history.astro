@@ -1,0 +1,10 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SearchHistory from "../components/search_history/index"
+---
+
+<Layout title="Search History">
+	<main>
+    <SearchHistory client:only="react" />
+  </main>
+</Layout>

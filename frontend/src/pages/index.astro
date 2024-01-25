@@ -1,0 +1,10 @@
+---
+import Layout from '../layouts/Layout.astro';
+import WeatherForecast from "../components/forecast/index"
+---
+
+<Layout title="Weather Forecast">
+	<main>
+    <WeatherForecast client:only="react" />
+  </main>
+</Layout>
